@@ -51,6 +51,12 @@ jobs:
         format: ALL
         out: reports
         args: "--failOnCVSS 9"
+    - name: Upload Dependency Check HTML Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: Dependency Check HTML Report
+        path: ".//"
+        retention-days: 30
   Unit_Testing:
     name: Unit Testing
     runs-on:
@@ -107,6 +113,12 @@ jobs:
       continue-on-error: true
       run: npm run coverage
       shell: bash
+    - name: Upload Code Coverage HTML Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: Code Coverage HTML Report
+        path: coverage/lcov-report/
+        retention-days: 30
   Build_Plublish_Image:
     name: Build Plublish Image
     runs-on:
