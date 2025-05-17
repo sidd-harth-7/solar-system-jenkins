@@ -8,7 +8,7 @@ on:
 env:
   MONGO_URI: mongodb+srv://supercluster.d83jj.mongodb.net/superData
   MONGO_USERNAME: superuser
-  MONGO_PASSWORD: "${{ secrets.mongo-db-password }}"
+  MONGO_PASSWORD: "${{ secrets.mongo_db_password }}"
 jobs:
   Installing_Dependencies:
     name: Installing Dependencies
