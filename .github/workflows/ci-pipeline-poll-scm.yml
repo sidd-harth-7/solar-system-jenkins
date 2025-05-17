@@ -51,20 +51,6 @@ jobs:
         format: ALL
         out: reports
         args: "--failOnCVSS 9"
-#     # This item has no matching transformer
-#     - dependencyCheckPublisher:
-#       - key: failedTotalCritical
-#         value:
-#           isLiteral: true
-#           value: 1
-#       - key: pattern
-#         value:
-#           isLiteral: true
-#           value: dependency-check-report.xml
-#       - key: stopBuild
-#         value:
-#           isLiteral: true
-#           value: true
   Unit_Testing:
     name: Unit Testing
     runs-on:
