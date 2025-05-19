@@ -79,6 +79,9 @@ pipeline {
         stage('Build Image') {
             steps {
                 sh  'docker build -t siddharth67/solar-system:$GIT_COMMIT .'
+                withDockerRegistry(credentialsId: 'docker-hub-credentials', url: "") {
+                    sh  'docker push siddharth67/solar-system:$GIT_COMMIT'
+                }
             }
         }
         stage('Trivy Vulnerability Scanner') {
@@ -87,14 +90,6 @@ pipeline {
                 sh  '''trivy convert --format template --template "@/usr/local/share/trivy/templates/html.tpl" --output trivy-image-CRITICAL-results.html trivy-image-CRITICAL-results.json'''
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './', reportFiles: 'trivy-image-CRITICAL-results.html', reportName: 'Trivy Image Critical Vul Report', reportTitles: '', useWrapperFileDirectly: true])
            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                withDockerRegistry(credentialsId: 'docker-hub-credentials', url: "") {
-                    sh  'docker push siddharth67/solar-system:$GIT_COMMIT'
-                }
-            }
         }
     }
 }
